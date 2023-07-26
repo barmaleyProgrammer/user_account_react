@@ -1,7 +1,7 @@
-import styles from "./main.module.css";
-import togglePasswordVisibility from "../PasswordVisibility/PasswordVisibility";
+import styles from "../components/main/main.module.css";
+import togglePasswordVisibility from "../components/PasswordVisibility/PasswordVisibility";
 
-function MainForm () {
+function Home () {
     return (
         <div className={styles.container}>
             <div className="col-12">
@@ -30,4 +30,4 @@ function MainForm () {
         </div>
     )
 }
-export default MainForm
+export default Home

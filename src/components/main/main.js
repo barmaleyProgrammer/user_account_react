@@ -1,39 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+// import Container from 'react-bootstrap/Container';
+// import Nav from 'react-bootstrap/Nav';
+// import Navbar from 'react-bootstrap/Navbar';
+import styles from './main.module.css';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Header from '../header';
+import Footer from "../footer";
+import Home from "../../pages/Home";
+import About from "../../pages/about";
+import Cards from "../../pages/cards";
+function Main() {
     return (
-        <div className="App">
-            <header className="App-header">
-                import Nav from 'react-bootstrap/Nav';
-
-                function BasicExample() {
-                return (
-                <Nav
-                activeKey="/home"
-                onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-            >
-                <Nav.Item>
-                    <Nav.Link href="/home">Active</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link-1">Link</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link-2">Link</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="disabled" disabled>
-                        Disabled
-                    </Nav.Link>
-                </Nav.Item>
-            </Nav>
-            );
-            }
-
-            export default BasicExample;      </header>
-</div>
-);
+        <div>
+            <Router>
+                <Header />
+                <Routes>
+                    <Route path="main" element={<Main/>} />
+                    <Route path="about" element={<About/>} />
+                    <Route path="home" element={<Home/>} />
+                    <Route path="cards" element={<Cards/>} />
+                </Routes>
+                <Footer  />
+            </Router>
+        </div>
+    );
 }
 
-export default App;
+export default Main
