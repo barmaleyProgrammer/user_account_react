@@ -1,7 +1,7 @@
 // import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
 // import Navbar from 'react-bootstrap/Navbar';
-import styles from './main.module.css';
+// import styles from './main.module.css';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from '../header';
 import Footer from "../footer";
