@@ -3,9 +3,9 @@ import validator from './assets/img/validator.jpg';
 function About () {
     return (
 
-<section className={styles.about}>
+<section>
     <div className="container">
-        <div className="row">
+        <div className={styles.row}>
             <div className="col-12">
                 <h2 className="text-center text-uppercase color2 mb-5">Про нас</h2>
             </div>
@@ -29,7 +29,7 @@ function About () {
                         <h5 style={{
                             padding: '20px',
                             border: '3px solid #2A5FA5FF'
-                        }}>Наші контакти<a href="https://ua.korrespondent.net/" target="_blank">тут</a></h5>
+                        }}>Наші контакти<a href="https://ua.korrespondent.net/" target="_blank"  rel="noreferrer">тут</a></h5>
                         <h5 style={{
                             padding: '20px',
                             border: '3px solid #2A5FA5FF'

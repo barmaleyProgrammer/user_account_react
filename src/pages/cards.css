@@ -1,14 +1,16 @@
-/*table {*/
-/*    width: 100%;*/
-/*    text-align: center;*/
-/*    border-collapse: separate;*/
-/*    border-spacing: 3px;*/
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 3px;
 
-/*}*/
-/*table, th, td {*/
-/*    border: 1px solid black;*/
-/*}*/
-.accord {
-    width: 20px;
-    background-color: #0DCAF0;
+}
+table, th, td {
+    border: 1px solid black;
+}
+.accordion {
+    /*background-color: #F00D7FFF;*/
+    width: 1200px;
+    padding: 30px 100px;
+
 }

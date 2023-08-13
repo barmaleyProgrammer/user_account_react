@@ -1,36 +1,63 @@
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import TabsCards from "./assets/tabs.cards";
 import styles from './cards.css';
+// import AddCard from "./assets/add.card";
+
 function AllCollapseExample() {
-    return (
-        <div className={styles.accord}>
-        <Accordion>
-            <Accordion.Item eventKey="0">
-                <Accordion.Header>Accordion Item #1</Accordion.Header>
-                <Accordion.Body>
-                    <div>
-                        <TabsCards />
-                    </div>
 
+    const apiUrl = 'http://localhost/personal_account/front_api.php';
+    const usedId = 146;
 
+    const [cards, setAppState] = useState([]);
 
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="1">
-                <Accordion.Header>Accordion Item #2</Accordion.Header>
-                <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </Accordion.Body>
-            </Accordion.Item>
-        </Accordion>
-            </div>
-    );
+    useEffect(() => {
+        axios.get(`${apiUrl}?action=card&room=${usedId}`).then((resp) => {
+            resp.data.forEach((item, i) => {
+                axios.get(`${apiUrl}?action=card&balance=${resp.data[i].card_num}`).then((resp1) => {
+                    resp.data[i].balance = resp1.data.data.results.map((item) => {
+                        return Number(item.wallet_sum);
+                    }).reduce((a, b) => {
+                        return a + b;
+                    }, 0);
+                });
+
+                axios.get(`${apiUrl}?action=card&payment=${resp.data[i].card_num}`).then((resp2) => {
+                    resp.data[i].payments = resp2.data;
+                });
+
+                axios.get(`${apiUrl}?action=card&validation=${resp.data[i].card_num}`).then((resp3) => {
+                    resp.data[i].validations = resp3.data;
+                });
+
+                axios.get(`${apiUrl}?action=seller&product=${resp.data[i].card_num}`).then((resp4) => {
+                    resp.data[i].products = resp4.data.data;
+                });
+            });
+            setAppState(resp.data);
+        });
+
+    }, [setAppState]);
+
+    const res = [];
+    cards.forEach((card, index) => {
+        res.push(
+            <Accordion className={styles.accordion} key={card.nfc_id}>
+                <Accordion.Item>
+                    <Accordion.Header>{ card.card_num }</Accordion.Header>
+                    <Accordion.Body>
+                        <div>
+                            <TabsCards card={ card } />
+                        </div>
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
+        );
+    });
+    // res.push(<div><AddCard /></div>);
+
+    return (res);
 }
 
 export default AllCollapseExample;
